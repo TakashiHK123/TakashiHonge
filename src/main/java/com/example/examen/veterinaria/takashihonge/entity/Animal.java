@@ -24,15 +24,20 @@ public class Animal implements Serializable {
     private int peso;
     @NotEmpty
     private String duenho;
+    @NotNull
+    @Max(1)
+    @Min(99999)
+    private int idVeterinaria;
 
     public Animal() {
     }
 
-    public Animal(int idAnimal, int edad, int peso, String duenho) {
+    public Animal(int idAnimal, int edad, int peso, String duenho, int idVeterinaria) {
         this.idAnimal = idAnimal;
         this.edad = edad;
         this.peso = peso;
         this.duenho = duenho;
+        this.idVeterinaria = idVeterinaria;
     }
 
     public int getIdAnimal() {
@@ -67,6 +72,14 @@ public class Animal implements Serializable {
         this.duenho = duenho;
     }
 
+    public int getIdVeterinaria() {
+        return idVeterinaria;
+    }
+
+    public void setIdVeterinaria(int idVeterinaria) {
+        this.idVeterinaria = idVeterinaria;
+    }
+
     @Override
     public String toString() {
         return "Animal{" +
@@ -74,6 +87,7 @@ public class Animal implements Serializable {
                 ", edad=" + edad +
                 ", peso=" + peso +
                 ", duenho='" + duenho + '\'' +
+                ", idVeterinaria=" + idVeterinaria +
                 '}';
     }
 }

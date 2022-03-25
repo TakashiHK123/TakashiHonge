@@ -142,7 +142,7 @@ public class VeterinariaController {
         return "veterinaria-template/eliminar";
     }
 
-    @DeleteMapping("/eliminar")
+    @PostMapping("/eliminar")
     public String eliminarProc(@Valid Veterinaria veterinaria, BindingResult result, Model model,
                                @RequestParam(name= "id_veterinaria") String idVeterinaria) throws SQLException {
         try{

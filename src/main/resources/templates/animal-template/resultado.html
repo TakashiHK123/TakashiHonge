@@ -3,15 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title th:text="${titulo}"></title>
 </head>
 
 <body>
-<h1 th:text="${titulo}"></h1>
-
-<div th:if="${animales.isEmpty()}">No hay Animales en la lista!</div>
-<table th:if="${not animales.isEmpty()}">
+<h3 th:text="${titulo}"></h3>
+<table>
     <thead>
     <tr>
         <th th:text="${id_animal}"></th>
@@ -22,12 +20,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="animal: ${animales}">
-        <td th:text="${animal.idAnimal}"></td>
-        <td th:text="${animal.duenho}"></td>
-        <td th:text="${animal.peso}"></td>
-        <td th:text="${animal.edad}"></td>
-        <td th:text="${animal.idVeterinaria}"></td>
+    <tr th:each="animl: ${animal}">
+        <td th:text="${animl.idAnimal}"></td>
+        <td th:text="${animl.duenho}"></td>
+        <td th:text="${animl.peso}"></td>
+        <td th:text="${animl.edad}"></td>
+        <td th:text="${animl.idVeterinaria}"></td>
     </tr>
     </tbody>
 </table>

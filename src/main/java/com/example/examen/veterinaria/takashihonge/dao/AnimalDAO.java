@@ -18,10 +18,9 @@ import java.util.Map;
 @Repository
 public class AnimalDAO {
     private static final String SQL="SELECT * FROM animal";
-    private static final String SQL_INSERT = "INSERT INTO animal (duenho, peso, edad) VALUES (?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO animal (duenho, peso, edad, id_veterinaria) VALUES (?, ?, ? ,?)";
     private static final String SQL_DELETE = "DELETE FROM animal WHERE id_animal=?";
     private static final String SQL_GET = "SELECT * FROM animal WHERE id_animal = ?";
-    private static final String SQL_MODIFY = "UPDATE animal SET =?, =? WHERE id_animal=?";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -37,7 +36,7 @@ public class AnimalDAO {
         return jdbcTemplate.query(SQL, new AnimalRowMapper());
     }
     
-    public Animal add(String duenho, int peso, int edad){
+    public Animal add(String duenho, int peso, int edad, int idVeterinaria){
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
@@ -45,6 +44,7 @@ public class AnimalDAO {
             preparedStatement.setString(1, duenho);
             preparedStatement.setInt(2, peso);
             preparedStatement.setInt(3,edad);
+            preparedStatement.setInt(4, idVeterinaria);
             return preparedStatement;
         },keyHolder);
         Integer id = (Integer) keyHolder.getKeys()
@@ -57,6 +57,7 @@ public class AnimalDAO {
         animal.setDuenho(duenho);
         animal.setPeso(peso);
         animal.setEdad(edad);
+        animal.setIdVeterinaria(idVeterinaria);
         return animal;
     }
 
@@ -73,7 +74,4 @@ public class AnimalDAO {
         return jdbcTemplate.update(SQL_DELETE, id_animal);
     }
 
-    public int modify(Animal animal){
-        return this.jdbcTemplate.update(SQL_MODIFY,animal.getDuenho(),animal.getPeso(),animal.getEdad());
-    }
 }

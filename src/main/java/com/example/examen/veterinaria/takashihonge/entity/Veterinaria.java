@@ -18,19 +18,14 @@ public class Veterinaria implements Serializable {
     private String nombre;
     @NotEmpty
     private String descripcion;
-    @NotNull
-    @Min(1)
-    @Max(99999)
-    private int idAnimales;
 
     public Veterinaria() {
     }
 
-    public Veterinaria(int idVeterinaria, String nombre, String descripcion, int idAnimales) {
+    public Veterinaria(int idVeterinaria, String nombre, String descripcion) {
         this.idVeterinaria = idVeterinaria;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.idAnimales = idAnimales;
     }
 
     public int getIdVeterinaria() {
@@ -57,21 +52,12 @@ public class Veterinaria implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public int getIdAnimales() {
-        return idAnimales;
-    }
-
-    public void setIdAnimales(int idAnimales) {
-        this.idAnimales = idAnimales;
-    }
-
     @Override
     public String toString() {
         return "Veterinaria{" +
                 "idVeterinaria=" + idVeterinaria +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", idAnimales=" + idAnimales +
                 '}';
     }
 }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${titulo}"></title>
+</head>
+<body>
+<form th:action="@{/animal/buscar}" method="POST">
+    <h1 th:text="${titulo}"></h1>
+    <div>
+        <label for="id_animal">ID Animal</label>
+        <div>
+            <input type="number" name="id_animal" id="id_animal" th:value="${animal.idAnimal}">
+        </div>
+        <div th:if="${error != null && error.containsKey('id_animal')}" th:text="${error.id_animal}"></div>
+    </div>
+    <div>
+        <div>
+            <input type="submit" value="Buscar">
+        </div>
+    </div>
+</form>
+</body>
+</html>

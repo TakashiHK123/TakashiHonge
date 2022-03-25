@@ -4,6 +4,7 @@ import com.example.examen.veterinaria.takashihonge.dao.AnimalDAO;
 import com.example.examen.veterinaria.takashihonge.entity.Animal;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ public class AnimalController {
 
     @Autowired
     AnimalDAO animalDAO;
+
     @GetMapping("/listar")
     public String listaAlu(Model model) {
         List<Animal> animales = new ArrayList<>();
@@ -29,8 +31,9 @@ public class AnimalController {
         model.addAttribute("titulo", "Lista de Animales");
         model.addAttribute("id_animal", "ID Animal");
         model.addAttribute("duenho", "Dueño");
+        model.addAttribute("id_veterinaria", "ID Veterinaria");
         model.addAttribute("peso", "Peso");
-        model.addAttribute("animal", animales);
+        model.addAttribute("animales", animales);
         return "animal-template/listar";
     }
 
@@ -47,28 +50,42 @@ public class AnimalController {
     public String agregarAnimalProc(@Valid Animal animal, BindingResult result, Model model,
                                  @RequestParam(name = "duenho") String duenho,
                                  @RequestParam(name = "peso") String peso,
-                                    @RequestParam(name = "edad") String edad ) throws SQLException {
-
-        if (duenho != "" && peso != "" && edad != "") {
-            int intPeso = Integer.parseInt(peso);
-            int intEdad = Integer.parseInt(edad);
-            animal = animalDAO.add(duenho, intPeso, intEdad);
-            model.addAttribute("id_animal", "ID Animal");
-            model.addAttribute("duenho", "Dueño");
-            model.addAttribute("peso", "Peso");
-            model.addAttribute("edad","Edad");
-            model.addAttribute("titulo", "Animal Agregado");
-            model.addAttribute("animal", animal);
-
-        } else if (result.hasErrors()) {
-            Map<String, String> errores = new HashMap<>();
-            result.getFieldErrors().forEach(err -> {
-                errores.put(err.getField(), "El campo ".concat(err.getField()).concat(" ").concat(err.getDefaultMessage()));
-            });
-            model.addAttribute("titulo", "Falta datos");
-            model.addAttribute("error", errores);
-            return "animal-template/agregar";
-        }
+                                    @RequestParam(name = "edad") String edad,
+                                    @RequestParam(name = "id_veterinaria") String idVeterinaria) throws SQLException {
+                try{
+                    if (duenho != "" && peso != "" && edad != "" && idVeterinaria != "") {
+                        int intPeso = Integer.parseInt(peso);
+                        int intEdad = Integer.parseInt(edad);
+                        int intIdVeterinaria= Integer.parseInt(idVeterinaria);
+                        animal = animalDAO.add(duenho, intPeso, intEdad, intIdVeterinaria);
+                        model.addAttribute("id_animal", "ID Animal");
+                        model.addAttribute("duenho", "Dueño");
+                        model.addAttribute("peso", "Peso");
+                        model.addAttribute("edad","Edad");
+                        model.addAttribute("id_veterinaria","ID veterinaria");
+                        model.addAttribute("titulo", "Animal Agregado");
+                        model.addAttribute("animal", animal);
+                    }
+                    else if (result.hasErrors()) {
+                        Map<String, String> errores = new HashMap<>();
+                        result.getFieldErrors().forEach(err -> {
+                            errores.put(err.getField(), "El campo ".concat(err.getField()).concat(" ").concat(err.getDefaultMessage()));
+                        });
+                        model.addAttribute("titulo", "Falta datos");
+                        model.addAttribute("error", errores);
+                        return "animal-template/agregar";
+                    }
+                } catch (DataIntegrityViolationException e) {
+                    Animal animalVacio =new Animal();
+                    model.addAttribute("id_animal", "");
+                    model.addAttribute("duenho", "");
+                    model.addAttribute("peso", "");
+                    model.addAttribute("edad", "");
+                    model.addAttribute("id_veterinaria","");
+                    model.addAttribute("titulo", "ERROR: 500 \nNo se puede agregar viola la llave foranea id_veterianaria no esta presente en la tabla");
+                    model.addAttribute("animal", animalVacio);
+                    return "animal-template/resultado";
+                }
         return "animal-template/resultado";
     }
 
@@ -147,7 +164,7 @@ public class AnimalController {
         return "animal-template/eliminar";
     }
 
-    @DeleteMapping("/eliminar")
+    @PostMapping("/eliminar")
     public String eliminarProc(@Valid Animal animal, BindingResult result, Model model,
                                   @RequestParam(name= "id_animal") String idAnimal) throws SQLException {
         try{
@@ -160,6 +177,7 @@ public class AnimalController {
                         model.addAttribute("duenho", "Dueño");
                         model.addAttribute("peso", "Peso");
                         model.addAttribute("edad", "Edad");
+                        model.addAttribute("id_veterinaria", "Id Veterinaria");
                         model.addAttribute("titulo", "Animal Eliminado");
                         model.addAttribute("animal", animal);
                     }
@@ -169,6 +187,7 @@ public class AnimalController {
                     model.addAttribute("duenho", " ");
                     model.addAttribute("peso", " ");
                     model.addAttribute("edad", " ");
+                    model.addAttribute("id_veterinaria", " ");
                     model.addAttribute("titulo", "El animal no se encuentra en la base de dato");
                     model.addAttribute("animal", animal);
                     return "animal-template/resultado";

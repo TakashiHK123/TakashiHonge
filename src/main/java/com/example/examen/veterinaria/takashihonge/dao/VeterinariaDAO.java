@@ -22,7 +22,6 @@ public class VeterinariaDAO {
     private static final String SQL_INSERT = "INSERT INTO veterinaria (nombre, descripcion) VALUES (?, ?)";
     private static final String SQL_DELETE = "DELETE FROM veterinaria WHERE id_veterinaria=?";
     private static final String SQL_GET = "SELECT * FROM veterinaria WHERE id_veterinaria=?";
-    private static final String SQL_MODIFY = "UPDATE veterinaria SET nombre=?, descripcion=? WHERE id_veterinaria=?";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -72,7 +71,4 @@ public class VeterinariaDAO {
         return jdbcTemplate.update(SQL_DELETE, id_veterinaria);
     }
 
-    public int modify(Veterinaria veterinaria){
-        return this.jdbcTemplate.update(SQL_MODIFY,veterinaria.getNombre(),veterinaria.getDescripcion());
-    }
 }
