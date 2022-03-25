@@ -21,7 +21,7 @@ public class VeterinariaDAO {
     private static final String SQL="SELECT * FROM veterinaria";
     private static final String SQL_INSERT = "INSERT INTO veterinaria (nombre, descripcion) VALUES (?, ?)";
     private static final String SQL_DELETE = "DELETE FROM veterinaria WHERE id_veterinaria=?";
-    private static final String SQL_GET = "SELECT * FROM veterinaria WHERE id_veterinaria=?";
+    private static final String SQL_SELECT = "SELECT * FROM veterinaria WHERE id_veterinaria=?";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -59,7 +59,7 @@ public class VeterinariaDAO {
     }
 
     public Veterinaria getVeterinaria(int id_veterinaria) {
-        Veterinaria veterinaria = jdbcTemplate.queryForObject(SQL_GET, new Object[] { id_veterinaria }, new VeterinariaRowMapper());
+        Veterinaria veterinaria = jdbcTemplate.queryForObject(SQL_SELECT, new Object[] { id_veterinaria }, new VeterinariaRowMapper());
         if(veterinaria!=null){
             return veterinaria;
         }else{

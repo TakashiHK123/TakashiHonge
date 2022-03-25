@@ -50,12 +50,12 @@ public class VeterinariaController {
                                     @RequestParam(name = "descripcion") String descripcion) throws SQLException {
 
         if (nombre != "" && descripcion != "") {
-            veterinaria = veterinariaDAO.add(nombre, descripcion);
+            veterinaria = veterinariaDAO.add(nombre,descripcion);
             model.addAttribute("id_veterinaria", "ID Veterinaria");
             model.addAttribute("nombre", "Nombre");
             model.addAttribute("descripcion","Descripcion");
             model.addAttribute("titulo", "Veterinaria Agregado");
-            model.addAttribute("Veterinaria", veterinaria);
+            model.addAttribute("veterinaria", veterinaria);
 
         } else if (result.hasErrors()) {
             Map<String, String> errores = new HashMap<>();
@@ -83,11 +83,11 @@ public class VeterinariaController {
                                    @RequestParam(name= "id_veterinaria") String idVeterinaria) throws SQLException {
         try{
             int idBuscar =Integer.parseInt(idVeterinaria);
-            if (idBuscar>0) {
+            if (idBuscar!=0) {
                 try{
                     veterinaria = veterinariaDAO.getVeterinaria(idBuscar);
                     if(veterinaria!=null){
-                        model.addAttribute("id_Veterinaria", "ID Veterinaria");
+                        model.addAttribute("id_veterinaria", "ID Veterinaria");
                         model.addAttribute("descripcion", "Descripcion");
                         model.addAttribute("nombre", "Nombre");
                         model.addAttribute("titulo", "Veterinaria Encontrado");
@@ -129,7 +129,7 @@ public class VeterinariaController {
             });
             model.addAttribute("titulo", "Falta datos");
             model.addAttribute("error", errores);
-            return "veterinaria-template/eliminar";
+            return "veterinaria-template/buscar";
         }
         return "veterinaria-template/resultado";
     }

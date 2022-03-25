@@ -20,7 +20,7 @@ public class AnimalDAO {
     private static final String SQL="SELECT * FROM animal";
     private static final String SQL_INSERT = "INSERT INTO animal (duenho, peso, edad, id_veterinaria) VALUES (?, ?, ? ,?)";
     private static final String SQL_DELETE = "DELETE FROM animal WHERE id_animal=?";
-    private static final String SQL_GET = "SELECT * FROM animal WHERE id_animal = ?";
+    private static final String SQL_SELECT = "SELECT * FROM animal WHERE id_animal = ?";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -62,7 +62,7 @@ public class AnimalDAO {
     }
 
     public Animal getAnimal(int id_animal) {
-        Animal animal = jdbcTemplate.queryForObject(SQL_GET, new Object[] { id_animal }, new AnimalRowMapper());
+        Animal animal = jdbcTemplate.queryForObject(SQL_SELECT, new Object[] { id_animal }, new AnimalRowMapper());
         if(animal!=null){
             return animal;
         }else{

@@ -151,7 +151,7 @@ public class AnimalController {
             });
             model.addAttribute("titulo", "Falta datos");
             model.addAttribute("error", errores);
-            return "animal-template/eliminar";
+            return "animal-template/buscar";
         }
         return "animal-template/resultado";
     }
