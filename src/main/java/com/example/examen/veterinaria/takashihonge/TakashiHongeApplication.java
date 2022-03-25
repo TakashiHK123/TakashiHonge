@@ -1,4 +1,4 @@
-package com.example.examen.veterinaria.takashiHonge;
+package com.example.examen.veterinaria.takashihonge;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

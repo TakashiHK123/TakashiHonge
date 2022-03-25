@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${titulo}"></title>
+</head>
+<body>
+<form th:action="@{/animal/agregar}" method="POST">
+    <h1 th:text="${titulo}"></h1>
+    <div>
+        <label for="duenho">Dueño</label>
+        <div>
+            <input type="text" name="duenho" id="duenho" th:value="${animal.duenho}">
+        </div>
+        <div th:if="${error != null && error.containsKey('duenho')}" th:text="${error.duenho}"></div>
+    </div>
+    <div>
+        <label for="peso">Peso</label>
+        <div>
+            <input type="text" name="peso" id="peso" th:value="${animal.peso}">
+        </div>
+        <div th:if="${error != null && error.containsKey('peso')}" th:text="${error.peso}"></div>
+    </div>
+    <div>
+        <label for="edad">Peso</label>
+        <div>
+            <input type="text" name="edad" id="edad" th:value="${animal.edad}">
+        </div>
+        <div th:if="${error != null && error.containsKey('edad')}" th:text="${error.edad}"></div>
+    </div>
+    <div>
+        <label for="id_veterinaria">ID veterinaria</label>
+        <div>
+            <input type="number" name="id_veterinaria" id="id_veterinaria" th:value="${animal.id_veterinaria}">
+        </div>
+        <div th:if="${error != null && error.containsKey('id_veterinaria')}" th:number="${error.id_veterinaria}"></div>
+    </div>
+    <div>
+        <div>
+            <input type="submit" value="Agregar">
+        </div>
+    </div>
+</form>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.example.examen.veterinaria.takashiHonge.entity;
+package com.example.examen.veterinaria.takashihonge.entity;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

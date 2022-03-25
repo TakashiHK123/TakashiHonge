@@ -1,6 +1,6 @@
-package com.example.examen.veterinaria.takashiHonge.rowmapper;
+package com.example.examen.veterinaria.takashihonge.rowmapper;
 
-import com.example.examen.veterinaria.takashiHonge.entity.Veterinaria;
+import com.example.examen.veterinaria.takashihonge.entity.Veterinaria;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

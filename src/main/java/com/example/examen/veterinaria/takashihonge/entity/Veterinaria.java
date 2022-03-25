@@ -1,4 +1,4 @@
-package com.example.examen.veterinaria.takashiHonge.entity;
+package com.example.examen.veterinaria.takashihonge.entity;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -15,17 +15,22 @@ public class Veterinaria implements Serializable {
     @Max(99999)
     private int idVeterinaria;
     @NotEmpty
-    private String Nombre;
+    private String nombre;
     @NotEmpty
     private String descripcion;
+    @NotNull
+    @Min(1)
+    @Max(99999)
+    private int idAnimales;
 
     public Veterinaria() {
     }
 
-    public Veterinaria(int idVeterinaria, String nombre, String descripcion) {
+    public Veterinaria(int idVeterinaria, String nombre, String descripcion, int idAnimales) {
         this.idVeterinaria = idVeterinaria;
-        Nombre = nombre;
+        this.nombre = nombre;
         this.descripcion = descripcion;
+        this.idAnimales = idAnimales;
     }
 
     public int getIdVeterinaria() {
@@ -37,11 +42,11 @@ public class Veterinaria implements Serializable {
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getDescripcion() {
@@ -52,12 +57,21 @@ public class Veterinaria implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public int getIdAnimales() {
+        return idAnimales;
+    }
+
+    public void setIdAnimales(int idAnimales) {
+        this.idAnimales = idAnimales;
+    }
+
     @Override
     public String toString() {
         return "Veterinaria{" +
                 "idVeterinaria=" + idVeterinaria +
-                ", Nombre='" + Nombre + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
+                ", idAnimales=" + idAnimales +
                 '}';
     }
 }

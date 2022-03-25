@@ -1,4 +1,4 @@
-package com.example.examen.veterinaria.takashiHonge.sqlerror;
+package com.example.examen.veterinaria.takashihonge.sqlerror;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;

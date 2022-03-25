@@ -1,8 +1,8 @@
-package com.example.examen.veterinaria.takashiHonge.dao;
+package com.example.examen.veterinaria.takashihonge.dao;
 
-import com.example.examen.veterinaria.takashiHonge.entity.Animal;
-import com.example.examen.veterinaria.takashiHonge.rowmapper.AnimalRowMapper;
-import com.example.examen.veterinaria.takashiHonge.sqlerror.CustomSQLErrorCodeTranslator;
+import com.example.examen.veterinaria.takashihonge.entity.Animal;
+import com.example.examen.veterinaria.takashihonge.rowmapper.AnimalRowMapper;
+import com.example.examen.veterinaria.takashihonge.sqlerror.CustomSQLErrorCodeTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -68,7 +68,12 @@ public class AnimalDAO {
             return null;
         }
     }
-    
 
+    public int delete(int id_animal) {
+        return jdbcTemplate.update(SQL_DELETE, id_animal);
+    }
 
+    public int modify(Animal animal){
+        return this.jdbcTemplate.update(SQL_MODIFY,animal.getDuenho(),animal.getPeso(),animal.getEdad());
+    }
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${titulo}"></title>
+</head>
+
+<body>
+<h1 th:text="${titulo}"></h1>
+
+<div th:if="${animal.isEmpty()}">No hay Animales en la lista!</div>
+<table th:if="${not animal.isEmpty()}">
+    <thead>
+    <tr>
+        <th th:text="${id_animal}"></th>
+        <th th:text="${duenho}"></th>
+        <th th:text="${peso}"></th>
+        <th th:text="${edad}"></th>
+        <th th:text="${id_veterinaria}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="animal: ${animales}">
+        <td th:text="${animal.id_animal}"></td>
+        <td th:text="${animal.duenho}"></td>
+        <td th:text="${animal.peso}"></td>
+        <td th:text="${animal.edad}"></td>
+        <td th:text="${animal.id_veterinaria}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+
+</html>
