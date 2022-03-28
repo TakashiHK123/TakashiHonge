@@ -17,6 +17,7 @@ public class AnimalRowMapper implements RowMapper<Animal> {
         animal.setDuenho(resultSet.getString("duenho"));
         animal.setEdad(resultSet.getInt("edad"));
         animal.setPeso(resultSet.getInt("peso"));
+        animal.setIdVeterinaria(resultSet.getInt("id_veterinaria"));
         return animal;
     }
 }
